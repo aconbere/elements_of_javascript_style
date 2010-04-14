@@ -1,2 +1,4 @@
 Anders Conbere <aconbere@conbere.org>
 Aviel Ginzburg
+Atul Varma
+Ian Bicking

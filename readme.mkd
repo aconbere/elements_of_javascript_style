@@ -1,6 +1,10 @@
+I start with the assertion that there is a great language inside of JavaScript. But that many people struggle to find their way to it. The most common resources for learning were written in the dark ages of the web, and advocate a style and structure that is non-condusive to quality readable code.
+
+The goal is to fill a gap in the JavaScript community, to codify common styles, to point out common anti-patterns to those learning the language for the first time, and to solidify a set of common styles for those who have been at this for a while longer.
+
 #Indentation#
 
-Always use two spaces, no tabs
+Always use two or four spaces, never both, no tabs
 
     var x = function(el) {
       alert(el);
@@ -25,7 +29,7 @@ begining of the block definition.
     var f = function() {
       var g = function() {
         if (true) {
-          alert("true");
+          return "g";
         }
       };
     };
@@ -34,9 +38,9 @@ In the case of if / else blocks. The else belongs inline with the closing
 brace. Previous rules hold.
 
     if (true) {
-      alert("true");
+      return "apple";
     } else {
-      alert("true");
+      return "orange";
     }
 
 #Naming#
@@ -59,20 +63,23 @@ Constants should be __ALL_CAPS__.
 
 #Functions#
 
-Functions should be declared as variables.
-
-    var myFunc = function() { alert("car") };
-
-Whenever possible a functions should be defined on multiple lines.
+Functions should be declared as variables, and whenever possible, defined on multiple lines.
 
     var myFunc = function() {
-      alert("car");
+      return "apple"
     };
 
 For one liners, and inline functions, an extra space after the starting brace,
 and before the ending brace improves readability.
 
-    var myFunc = function() { alert("car") };
+    var myFunc = function() { return "apple" };
+
+Avoid declaring functions inside object literals.
+
+    var myObj = {property: 1};
+    myObj.prop = function() {
+      return this.property;
+    };
 
 ##Optional Arguments##
 
@@ -104,3 +111,12 @@ When in doubt put the key in strings.
      "function": 30,
      "if": 40
     }
+
+## Monkey Patching ##
+
+Don't modify global objects in ways they weren't intended.
+
+    Object.prototype.type = "apple";
+
+Developers depend on being able to make good assumptions about the behavior of their tools. When changes are made that subtly change the behavior of code they're using  it makes it very hard to write correct programs.
+
