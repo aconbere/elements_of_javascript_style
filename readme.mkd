@@ -1,4 +1,4 @@
-= Indentation =
+#Indentation#
 
 Always use two spaces, no tabs
 
@@ -6,13 +6,13 @@ Always use two spaces, no tabs
       alert(el);
     };
 
-= WhiteSpace =
+#WhiteSpace#
 
 Avoid extraneous whitespace
 
     spam(ham[1], {eggs: 2})
 
-= Names =
+#Names#
 
 Variables and methods should be camelCase.
 
