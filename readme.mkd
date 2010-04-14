@@ -12,7 +12,34 @@ Avoid extraneous whitespace
 
     spam(ham[1], {eggs: 2})
 
-#Names#
+For clarity use one space before and after operators.
+
+    10 * (2.0 / 5.0)
+
+#Braces#
+
+The starting brace begins inline with the block definition. The closing brace
+ends on its own line at the bottom of the block, in the same column as the
+begining of the block definition.
+
+    var f = function() {
+      var g = function() {
+        if (true) {
+          alert("true");
+        }
+      };
+    };
+
+In the case of if / else blocks. The else belongs inline with the closing
+brace. Previous rules hold.
+
+    if (true) {
+      alert("true");
+    } else {
+      alert("true");
+    }
+
+#Naming#
 
 Variables and methods should be camelCase.
 
