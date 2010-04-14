@@ -1,4 +1,4 @@
-I start with the assertion that there is a great language inside of JavaScript. But that many people struggle to find their way to it. The most common resources for learning were written in the dark ages of the web, and advocate a style and structure that is non-condusive to quality readable code.
+We start with the assertion that there is a great language inside of JavaScript. But that many people struggle to find their way to it. The most common resources for learning were written in the dark ages of the web, and advocate a style and structure that is non-condusive to quality readable code.
 
 The goal is to fill a gap in the JavaScript community, to codify common styles, to point out common anti-patterns to those learning the language for the first time, and to solidify a set of common styles for those who have been at this for a while longer.
 
@@ -38,8 +38,8 @@ Instead of making a bunch of extra variables in a namespace, you can contain the
       var y = 10;
       var z = 20;
       return {"x": 0,
-                   "y": y,
-                   "z": z };
+              "y": y,
+              "z": z };
     }();
 
 #Indentation#
