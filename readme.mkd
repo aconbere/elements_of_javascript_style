@@ -1,0 +1,31 @@
+= Indentation =
+
+Always use two spaces, no tabs
+
+    var x = function(el) {
+      alert(el);
+    };
+
+= WhiteSpace =
+
+Avoid extraneous whitespace
+
+    spam(ham[1], {eggs: 2})
+
+= Names =
+
+Variables and methods should be camelCase.
+
+Classes should be CamelCased but capatalized in front.
+
+Constants should be ALL_CAPS.
+
+    MY_CONSTANT = 10;
+
+    var myVariable = 12;
+
+    var MyClass = function() {
+      this.myMember = 13;
+    }
+
+    MyClass.prototype.myMethod = function() { alert(this.myMemeber) };
