@@ -73,3 +73,34 @@ For one liners, and inline functions, an extra space after the starting brace,
 and before the ending brace improves readability.
 
     var myFunc = function() { alert("car") };
+
+##Optional Arguments##
+
+To define an optional argument use the "||" operator.
+
+    var myFunc = function(x) {
+        x = x || "default";
+    };
+
+#Things to avoid#
+
+## Trailing Commas ##
+
+Never use a trailing comma (not universally supported).
+
+    ["apple",
+     "orange",
+     "pineapple"]
+
+    {x: 10,
+     y: 10
+    }
+
+## Keywords as hash keys ##
+
+When in doubt put the key in strings.
+
+    {"event": 20,
+     "function": 30,
+     "if": 40
+    }
