@@ -79,7 +79,7 @@ and before the ending brace improves readability.
 To define an optional argument use the "||" operator.
 
     var myFunc = function(x) {
-        x = x || "default";
+      x = x || "default";
     };
 
 #Things to avoid#
