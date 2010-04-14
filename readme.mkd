@@ -2,12 +2,52 @@ I start with the assertion that there is a great language inside of JavaScript. 
 
 The goal is to fill a gap in the JavaScript community, to codify common styles, to point out common anti-patterns to those learning the language for the first time, and to solidify a set of common styles for those who have been at this for a while longer.
 
+You can contribute here, or fork this document on github!
+
+http://github.com/aconbere/elements_of_javascript_style
+
+#Scopes and Name Spaces#
+
+Work to stay out of the global scope as much as possible.
+
+The default scope for variables and functions in JavaScript is global. This can make life difficult.  Some strategies to avoid issues are:
+
+Make sure all variables that are scoped to a particular block, and declared with the var keyword. Variables declared without var, are always injected into the global namespace.
+
+    function() {
+      var x = 10;
+    };
+
+This even goes for for loops.
+
+    var j = 0;
+    for(var i = 0; i < 10; i++) {
+      j = j + i;
+    }
+
+When writing your applications make use of objects to store your classes and functions.
+
+    var MyApp = {};
+    MyApp.MyClass = function() {};
+  
+    var x = new MyApp.MyClass();
+
+Instead of making a bunch of extra variables in a namespace, you can contain them within an anonymous function.
+
+    var x = function() {
+      var y = 10;
+      var z = 20;
+      return {"x": 0,
+                   "y": y,
+                   "z": z };
+    }();
+
 #Indentation#
 
 Always use two or four spaces, never both, no tabs
 
     var x = function(el) {
-      alert(el);
+      return el;
     };
 
 #WhiteSpace#
