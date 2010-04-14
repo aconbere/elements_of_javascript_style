@@ -41,11 +41,11 @@ brace. Previous rules hold.
 
 #Naming#
 
-Variables and methods should be camelCase.
+Variables and methods should be __camelCase__.
 
-Classes should be CamelCased but capatalized in front.
+Classes should be __CamelCased__ but capatalized in front.
 
-Constants should be ALL_CAPS.
+Constants should be __ALL_CAPS__.
 
     MY_CONSTANT = 10;
 
