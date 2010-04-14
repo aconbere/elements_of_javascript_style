@@ -56,3 +56,20 @@ Constants should be __ALL_CAPS__.
     }
 
     MyClass.prototype.myMethod = function() { alert(this.myMemeber) };
+
+#Functions#
+
+Functions should be declared as variables.
+
+    var myFunc = function() { alert("car") };
+
+Whenever possible a functions should be defined on multiple lines.
+
+    var myFunc = function() {
+      alert("car");
+    };
+
+For one liners, and inline functions, an extra space after the starting brace,
+and before the ending brace improves readability.
+
+    var myFunc = function() { alert("car") };
