@@ -2,10 +2,6 @@ We start with the assertion that there is a great language inside of JavaScript.
 
 The goal is to fill a gap in the JavaScript community, to codify common styles, to point out common anti-patterns to those learning the language for the first time, and to solidify a set of common styles for those who have been at this for a while longer.
 
-You can contribute here, or fork this document on github!
-
-http://github.com/aconbere/elements_of_javascript_style
-
 #Scopes and Name Spaces#
 
 Work to stay out of the global scope as much as possible.
