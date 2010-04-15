@@ -4,17 +4,19 @@ We start with the assertion that there is a great language inside of JavaScript.
 
 The goal is to fill a gap in the JavaScript community, to codify common styles, to point out common anti-patterns to those learning the language for the first time, and to solidify a set of common styles for those who have been at this for a while longer.
 
+> I know that some of this advice flys in the face of some libraries, and some people's personal style opinions. It's worth noting that I'm not suggesting that everyone in the world should agree with this, or even follow this advice. But that when suggesting a set of styles for someone learning JavaScript, these would be a great set of suggestions. Please keep that target audience in mind.
+
 ## Scopes and Name Spaces ##
 
-Work to stay out of the global scope as much as possible.
+Work to stay out of the global scope as much as possible. The default scope for variables and functions in JavaScript is global. This can make life difficult.  Some strategies to avoid issues are:
 
-The default scope for variables and functions in JavaScript is global. This can make life difficult.  Some strategies to avoid issues are:
-
-Make sure all variables that are scoped to a particular block, and declared with the var keyword. Variables declared without var, are always injected into the global namespace.
+Make sure all variables that are scoped to a particular block, and declared with the var keyword.
 
     function() {
       var x = 10;
     };
+
+> Variables declared without var, are always injected into the global namespace.
 
 This even goes for for loops.
 
@@ -170,5 +172,5 @@ Don't modify global objects in ways they weren't intended.
 
     Object.prototype.type = "apple";
 
-Developers depend on being able to make good assumptions about the behavior of their tools. When changes are made that subtly change the behavior of code they're using  it makes it very hard to write correct programs.
+> Developers depend on being able to make good assumptions about the behavior of their tools. When changes are made that subtly change the behavior of code they're using  it makes it very hard to write correct programs.
 
