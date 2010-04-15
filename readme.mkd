@@ -30,6 +30,11 @@ When writing your applications make use of objects to store your classes and fun
   
     var x = new MyApp.MyClass();
 
+> This prevents accidental name collisions with other libraries. If you want the
+> Map object, consider that it's a common name for an object. By attaching the
+> Map object to a less generic object like MyApp, you greatly reduce the chance
+> of accidental collision.
+
 Instead of making a bunch of extra variables in a namespace, you can contain them within an anonymous function.
 
     var x = function() {
@@ -107,6 +112,10 @@ Functions should be declared as variables, and whenever possible, defined on mul
       return "apple"
     };
 
+> This presents a single syntax for function declartion. It mirrors the
+> anonymous syntax used with passing functions to callbacks, and the
+> method of defining functions on classes or objects.
+
 For one liners, and inline functions, an extra space after the starting brace,
 and before the ending brace improves readability.
 
@@ -118,6 +127,11 @@ Avoid declaring functions inside object literals.
     myObj.prop = function() {
       return this.property;
     };
+
+> Function declaration inside objects isn't strictly bad, but it's worth
+> observing that it can quickly become crowded with braces, and in most
+> cases it can be more clearly accomplished by attaching the functions
+> to the object directly.
 
 ### Optional Arguments ###
 
