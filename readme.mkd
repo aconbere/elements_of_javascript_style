@@ -1,8 +1,10 @@
+# Elements of Javascript Style #
+
 We start with the assertion that there is a great language inside of JavaScript. But that many people struggle to find their way to it. The most common resources for learning were written in the dark ages of the web, and advocate a style and structure that is non-condusive to quality readable code.
 
 The goal is to fill a gap in the JavaScript community, to codify common styles, to point out common anti-patterns to those learning the language for the first time, and to solidify a set of common styles for those who have been at this for a while longer.
 
-#Scopes and Name Spaces#
+## Scopes and Name Spaces ##
 
 Work to stay out of the global scope as much as possible.
 
@@ -38,7 +40,7 @@ Instead of making a bunch of extra variables in a namespace, you can contain the
               "z": z };
     }();
 
-#Indentation#
+## Indentation ##
 
 Always use two or four spaces, never both, no tabs
 
@@ -46,7 +48,7 @@ Always use two or four spaces, never both, no tabs
       return el;
     };
 
-#WhiteSpace#
+## WhiteSpace ##
 
 Avoid extraneous whitespace
 
@@ -56,7 +58,7 @@ For clarity use one space before and after operators.
 
     10 * (2.0 / 5.0)
 
-#Braces#
+## Braces ##
 
 The starting brace begins inline with the block definition. The closing brace
 ends on its own line at the bottom of the block, in the same column as the
@@ -79,7 +81,7 @@ brace. Previous rules hold.
       return "orange";
     }
 
-#Naming#
+## Naming ##
 
 Variables and methods should be __camelCase__.
 
@@ -97,7 +99,7 @@ Constants should be __ALL_CAPS__.
 
     MyClass.prototype.myMethod = function() { alert(this.myMemeber) };
 
-#Functions#
+## Functions ##
 
 Functions should be declared as variables, and whenever possible, defined on multiple lines.
 
@@ -117,7 +119,7 @@ Avoid declaring functions inside object literals.
       return this.property;
     };
 
-##Optional Arguments##
+### Optional Arguments ###
 
 To define an optional argument use the "||" operator.
 
@@ -125,9 +127,9 @@ To define an optional argument use the "||" operator.
       x = x || "default";
     };
 
-#Things to avoid#
+## Things To Avoid ##
 
-## Trailing Commas ##
+### Trailing Commas ###
 
 Never use a trailing comma (not universally supported).
 
@@ -139,7 +141,7 @@ Never use a trailing comma (not universally supported).
      y: 10
     }
 
-## Keywords as hash keys ##
+### Keywords As Hash Keys ###
 
 When in doubt put the key in strings.
 
@@ -148,7 +150,7 @@ When in doubt put the key in strings.
      "if": 40
     }
 
-## Monkey Patching ##
+### Monkey Patching ###
 
 Don't modify global objects in ways they weren't intended.
 
