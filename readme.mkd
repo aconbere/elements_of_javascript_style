@@ -1,10 +1,10 @@
-# Elements of Javascript Style #
+# Elements of JavaScript Style #
 
-We start with the assertion that there is a great language inside of JavaScript. But that many people struggle to find their way to it. The most common resources for learning were written in the dark ages of the web, and advocate a style and structure that is non-condusive to quality readable code.
+We start with the assertion that there is a great language inside of JavaScript. But that many people struggle to find their way to it. The most common resources for learning were written in the dark ages of the web, and advocate a style and structure that is non-conducive to quality readable code.
 
 The goal is to fill a gap in the JavaScript community, to codify common styles, to point out common anti-patterns to those learning the language for the first time, and to solidify a set of common styles for those who have been at this for a while longer.
 
-> I know that some of this advice flys in the face of some libraries, and some people's personal style opinions. It's worth noting that I'm not suggesting that everyone in the world should agree with this, or even follow this advice. But that when suggesting a set of styles for someone learning JavaScript, these would be a great set of suggestions. Please keep that target audience in mind.
+> I know that some of this advice flies in the face of some libraries, and some people's personal style opinions. It's worth noting that I'm not suggesting that everyone in the world should agree with this, or even follow this advice. But that when suggesting a set of styles for someone learning JavaScript, these would be a great set of suggestions. Please keep that target audience in mind.
 
 ## Scopes and Name Spaces ##
 
@@ -16,7 +16,7 @@ Make sure all variables that are scoped to a particular block, and declared with
       var x = 10;
     };
 
-> Variables declared without var, are always injected into the global namespace.
+> Variables declared without var, are always injected into the global name space.
 
 This even goes for for loops.
 
@@ -28,16 +28,16 @@ This even goes for for loops.
 When writing your applications make use of objects to store your classes and functions.
 
     var MyApp = {};
-    MyApp.MyClass = function() {};
+    MyApp.Mapp = function() {};
   
-    var x = new MyApp.MyClass();
+    var x = new MyApp.Map();
 
 > This prevents accidental name collisions with other libraries. If you want the
 > Map object, consider that it's a common name for an object. By attaching the
 > Map object to a less generic object like MyApp, you greatly reduce the chance
 > of accidental collision.
 
-Instead of making a bunch of extra variables in a namespace, you can contain them within an anonymous function.
+Instead of making a bunch of extra variables in a name space, you can contain them within an anonymous function.
 
     var x = function() {
       var y = 10;
@@ -92,7 +92,7 @@ brace. Previous rules hold.
 
 Variables and methods should be __camelCase__.
 
-Classes should be __CamelCased__ but capatalized in front.
+Classes should be __CamelCased__ but capitalized in front.
 
 Constants should be __ALL_CAPS__.
 
@@ -104,7 +104,7 @@ Constants should be __ALL_CAPS__.
       this.myMember = 13;
     }
 
-    MyClass.prototype.myMethod = function() { alert(this.myMemeber) };
+    MyClass.prototype.myMethod = function() { alert(this.myMember) };
 
 ## Functions ##
 
@@ -114,7 +114,7 @@ Functions should be declared as variables, and whenever possible, defined on mul
       return "apple"
     };
 
-> This presents a single syntax for function declartion. It mirrors the
+> This presents a single syntax for function declaration. It mirrors the
 > anonymous syntax used with passing functions to callbacks, and the
 > method of defining functions on classes or objects.
 
@@ -143,6 +143,18 @@ To define an optional argument use the "||" operator.
       x = x || "default";
     };
 
+## Hashes ##
+
+Use strings as hash keys.
+
+    {"event": 20,
+     "function": 30,
+     "if": 40
+    }
+
+> In some implementations, keywords are invalid hash keys. Wrap them in quotes
+> to prevent issues.
+
 ## Things To Avoid ##
 
 ### Trailing Commas ###
@@ -155,15 +167,6 @@ Never use a trailing comma (not universally supported).
 
     {x: 10,
      y: 10
-    }
-
-### Keywords As Hash Keys ###
-
-When in doubt put the key in strings.
-
-    {"event": 20,
-     "function": 30,
-     "if": 40
     }
 
 ### Monkey Patching ###
