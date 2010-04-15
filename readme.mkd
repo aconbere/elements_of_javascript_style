@@ -18,7 +18,14 @@ Make sure all variables that are scoped to a particular block, and declared with
 
 > Variables declared without var, are always injected into the global name space.
 
-This even goes for for loops.
+    var f = function() {
+      x = 10;
+    };
+    console.log(x);
+
+    => 10
+
+This hold true in for loops as well.
 
     var j = 0;
     for(var i = 0; i < 10; i++) {
@@ -159,15 +166,32 @@ Use strings as hash keys.
 
 ### Trailing Commas ###
 
-Never use a trailing comma (not universally supported).
+Never use a trailing comma.
+
+__Good__:
 
     ["apple",
      "orange",
-     "pineapple"]
+     "pineapple"
+    ]
 
     {x: 10,
      y: 10
     }
+
+__Bad__:
+
+    ["apple",
+     "orange",
+     "pineapple",
+    ]
+
+    {x: 10,
+     y: 10,
+    }
+    
+> Trailing commas aren't supported in some browsers, so avoiding them is your
+> best bet.
 
 ### Monkey Patching ###
 
