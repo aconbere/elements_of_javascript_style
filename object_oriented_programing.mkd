@@ -1,0 +1,125 @@
+# Object Oriented JavaScript #
+
+For this section we're assuming that the reader is already familiar with Object
+Oriented programming.
+
+## Objects in Javascript ##
+
+Almost certainly you're already familiar with objects in JavaScript even if
+you're not aware of it. In JavaScript, Hashes and Objects are the same thing.
+And they are everywhere!
+
+    var h = {"x": 10,
+             "y": 20
+            };
+
+    h["x"]
+    => 10
+
+    h.x
+    => 10
+
+Similarly
+
+    var o = new Object();
+    o.x = 10;
+    o.y = 20;
+
+    o.x
+    => 10
+
+    o["x"]
+    => 10
+
+The goal of this document to talk about how we can use these objects to our
+advantage.
+
+## Classes ##
+
+In a traditional sense, JavaScript has no notion of a class. Rather it has only
+Objects, and ways to create objects. If we generalize however, a class is the
+abstracted collection of behaviors that you want a set of objects to posses.
+And in that sense we can easily construct classes.
+
+    var Speaker = function() {};
+
+We can create new instances of this class easily.
+
+    var m = new Speaker();
+
+We can give this Class behaviors by adding functions to it's prototype. A
+Prototype is an object defineable on all objects in javascript. It's a little
+piece that get's transfered to a new instance whenever the new arguement is used.
+
+    Speaker.prototype.sayHello = function() {
+      return "Hello";
+    };
+
+    m = new Speaker();
+    m.sayHello()
+    => "Hello"
+
+And we can give the objects initial data, by playing with the function that
+defines the class.
+
+    Speaker = function(name) {
+      this.name = name;
+    };
+
+    Speaker.prototype.sayHello = function() {
+      return "Hello my name is " + this.name + ".";
+    };
+
+    m = new Speaker("Carl");
+
+    m.sayHello();
+    =>  "Hello my name is Carl."
+
+We've introduce another object in this last example, "this". In JavaScript
+the "this" keyword defines the current state of an object instance. It's 
+important that it's a keyword, as the data that "this" points to can change.
+This is most notable when using callbacks from within an object.
+
+    var Receiver = function(name) {
+      this.name = name;
+    };
+
+    Receiver.prototype.repeat(f) {
+      return f();
+    };
+
+    var r = new Receiver("Sam");
+    
+
+    Speaker.prototype.sendMessage = function() {
+      r.repeat(function() {
+        this.sayHello(); // This will result in an error!
+      });
+    };
+
+
+## How To Use Prototypes ##
+
+    var Vehicle = function() {
+      this.speed = 0;
+      this.direction = [0, 0];
+      this.maxSpeed = 10;
+    };
+
+    Vehicle.prototype.setSpeed = function(speed) {
+      this.speed = Math.max(speed, this.maxSpeed);
+    };
+
+
+    var Car = function() {
+      this.maxSpeed = 120;
+    };
+
+    Car.prototype = Vehicle.prototype
+
+
+    var Bike = function() {
+      this.maxSpeed = 25;
+    };
+
+    Bike.prototype = Vehicle.prototype

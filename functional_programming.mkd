@@ -1,0 +1,64 @@
+One of JavaScripts strengths is the ability to make use of many functional
+programming constructs easily. It has first class functions (functions that
+can be stored as variables and passed to other functions), and it has a built
+in syntax for defining anonymous functions, or "lambdas".
+
+map, reduce, filter
+
+## Map ##
+    var map = function(array, f) {
+      var _map = function(acc, array, f) {
+        if( array.length <= 0) {
+          return acc;
+        } else {
+          return _map(acc.concat([f(array.shift())]), array, f);
+        }
+      };
+
+      return _map([], array, f);
+    };
+
+    map([1,2,3], function(i) { return i * i });
+    => [1, 4, 9]
+
+## Reduce ##
+
+    var reduce = function(array, acc, f) {
+      if( array.length <= 0 ) {
+        return acc;
+      } else {
+        return reduce(array, f(acc, array.shift()), f);
+      }
+    }
+
+    reduce([1, 2, 3], 0, function(sum, i) { return sum + i }); 
+    => 6
+
+## Filter ##
+
+    var filter = function(array, f) {
+      var _filter = function(acc, array, f) {
+        if(array.length <= 0) {
+          return acc;
+        } else {
+          var head = array.shift();
+
+          if(f(head)) {
+            return _filter(acc.concat([head]), array, f);
+          } else {
+            return _filter(acc, array, f);
+          }
+        }
+      };
+
+      return _filter([], array, f);
+    };
+
+    filter([1,2,3,4,5,6,7,8,9,10], function(i) { return i <= 5 });
+    => [1,2,3,4,5]
+
+## Map / Reduce ##
+
+    reduce(map([1,2,3], function(i) { return i * i }), 0, function(sum, i) { return sum + i });
+    => 14
+    

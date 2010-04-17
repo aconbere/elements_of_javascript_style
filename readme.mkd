@@ -6,6 +6,20 @@ The goal is to fill a gap in the JavaScript community, to codify common styles, 
 
 > I know that some of this advice flies in the face of some libraries, and some people's personal style opinions. It's worth noting that I'm not suggesting that everyone in the world should agree with this, or even follow this advice. But that when suggesting a set of styles for someone learning JavaScript, these would be a great set of suggestions. Please keep that target audience in mind.
 
+## Semi-Colons ##
+
+Always end each statement with a semi-colon ";".
+
+    var x = 10;
+    var y = 20;
+    var f = function() {
+        var z = (x * y);
+    };
+
+> While in most implimentations semi-colons are only required if there are
+> multiple statements on one line. By following this rule you allow your
+> code to be easily minified, and manipulated by others.
+
 ## Scopes and Name Spaces ##
 
 Work to stay out of the global scope as much as possible. The default scope for variables and functions in JavaScript is global. This can make life difficult.  Some strategies to avoid issues are:
