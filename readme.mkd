@@ -116,13 +116,13 @@ brace. Previous rules hold.
 
 Never leave the optional braces off of a one line if.
 
-*Good:*
+__Good:__
     if(condition) { return "apple"; }
     if(condition) {
       return "apple";
     }
 
-*Bad:*
+__Bad:__
     if(condition) return "apple";
     if(condition)
       return "apple";
