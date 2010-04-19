@@ -1,5 +1,8 @@
 # Elements of JavaScript Style #
 
+> "Break any of these rules sooner than say anything outright barbarous."
+> - George Orwell
+
 We start with the assertion that there is a great language inside of JavaScript. But that many people struggle to find their way to it. The most common resources for learning were written in the dark ages of the web, and advocate a style and structure that is non-conducive to quality readable code.
 
 The goal is to fill a gap in the JavaScript community, to codify common styles, to point out common anti-patterns to those learning the language for the first time, and to solidify a set of common styles for those who have been at this for a while longer.
@@ -108,6 +111,25 @@ brace. Previous rules hold.
     } else {
       return "orange";
     }
+
+### One Line Ifs ###
+
+Never leave the optional braces off of a one line if.
+
+*Good:*
+    if(condition) { return "apple"; }
+    if(condition) {
+      return "apple";
+    }
+
+*Bad:*
+    if(condition) return "apple";
+    if(condition)
+      return "apple";
+
+> Leaving off the braces on one line ifs makes refactoring your code much more
+> difficult. When adding more behavior to the conditional the braces will have
+> to be added in, also it can cause confusion when moving the block.
 
 ## Naming ##
 
