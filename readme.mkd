@@ -151,7 +151,7 @@ __Bad:__
 
 Variables and methods should be __camelCase__.
 
-Classes should be __CamelCased__ but capitalized in front.
+Constructors should be __CamelCased__ but capitalized in front.
 
 Constants should be __ALL_CAPS__.
 
@@ -159,11 +159,11 @@ Constants should be __ALL_CAPS__.
 
     var myVariable = 12;
 
-    var MyClass = function () {
+    var MyConstructor = function () {
       this.myMember = 13;
     };
 
-    MyClass.prototype.myMethod = function () {
+    MyConstructor.prototype.myMethod = function () {
       alert(this.myMember);
     };
 
