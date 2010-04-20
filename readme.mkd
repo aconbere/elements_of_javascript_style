@@ -15,8 +15,9 @@ Always end each statement with a semi-colon ";".
 
     var x = 10;
     var y = 20;
-    var f = function() {
-        var z = (x * y);
+    var f = function () {
+      var z = (x * y);
+      return z;
     };
 
 > While in most implimentations semi-colons are only required if there are
@@ -29,30 +30,44 @@ Work to stay out of the global scope as much as possible. The default scope for 
 
 Make sure all variables that are scoped to a particular block, and declared with the var keyword.
 
-    function() {
+    var f = function () {
       var x = 10;
+      return x;
     };
 
 > Variables declared without var, are always injected into the global name space.
 
-    var f = function() {
+    var f = function () {
       x = 10;
     };
-    console.log(x);
 
+    x
     => 10
 
-This hold true in for loops as well.
+This holds true in for loops as well as functions. The variables you declare
+inside of a for loop, can escape, so be sure to declare them properly.
 
+__Good__:
     var j = 0;
     for(var i = 0; i < 10; i++) {
-      j = j + i;
+      j++;
     }
+    i
+    => 10
+
+
+__Bad__:
+    var j = 0;
+    for(i = 0; i < 10; i++) {
+      j++;
+    }
+    i
+    => 10
 
 When writing your applications make use of objects to store your classes and functions.
 
     var MyApp = {};
-    MyApp.Mapp = function() {};
+    MyApp.Map = function () {};
   
     var x = new MyApp.Map();
 
@@ -63,7 +78,7 @@ When writing your applications make use of objects to store your classes and fun
 
 Instead of making a bunch of extra variables in a name space, you can contain them within an anonymous function.
 
-    var x = function() {
+    var x = function () {
       var y = 10;
       var z = 20;
       return {"x": 0,
@@ -75,7 +90,7 @@ Instead of making a bunch of extra variables in a name space, you can contain th
 
 Always use two or four spaces, never both, no tabs
 
-    var x = function(el) {
+    var f = function (el) {
       return el;
     };
 
@@ -95,12 +110,13 @@ The starting brace begins inline with the block definition. The closing brace
 ends on its own line at the bottom of the block, in the same column as the
 begining of the block definition.
 
-    var f = function() {
-      var g = function() {
+    var f = function () {
+      var g = function () {
         if (true) {
           return "g";
         }
       };
+      return g();
     };
 
 In the case of if / else blocks. The else belongs inline with the closing
@@ -139,22 +155,24 @@ Classes should be __CamelCased__ but capitalized in front.
 
 Constants should be __ALL_CAPS__.
 
-    MY_CONSTANT = 10;
+    var MY_CONSTANT = 10;
 
     var myVariable = 12;
 
-    var MyClass = function() {
+    var MyClass = function () {
       this.myMember = 13;
-    }
+    };
 
-    MyClass.prototype.myMethod = function() { alert(this.myMember) };
+    MyClass.prototype.myMethod = function () {
+      alert(this.myMember);
+    };
 
 ## Functions ##
 
 Functions should be declared as variables, and whenever possible, defined on multiple lines.
 
-    var myFunc = function() {
-      return "apple"
+    var myFunc = function () {
+      return "apple";
     };
 
 > This presents a single syntax for function declaration. It mirrors the
@@ -164,12 +182,12 @@ Functions should be declared as variables, and whenever possible, defined on mul
 For one liners, and inline functions, an extra space after the starting brace,
 and before the ending brace improves readability.
 
-    var myFunc = function() { return "apple" };
+    var myFunc = function () { return "apple"; };
 
 Avoid declaring functions inside object literals.
 
     var myObj = {property: 1};
-    myObj.prop = function() {
+    myObj.prop = function () {
       return this.property;
     };
 
@@ -182,7 +200,7 @@ Avoid declaring functions inside object literals.
 
 To define an optional argument use the "||" operator.
 
-    var myFunc = function(x) {
+    var myFunc = function (x) {
       x = x || "default";
     };
 
