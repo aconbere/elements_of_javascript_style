@@ -41,16 +41,13 @@ manipulate, and create objects to our advantage.
 
 ## Building Your Own Objects ##
 
-Although Javascript is distinctly Object Oriented, you'll notices that it has
-no notion of a class. Rather it has only Objects, and Constructor Functions.
-People coming from a background in other object oriented languages might find
-this confusing, and should be warned that many of your intuitions about the way
-these constructs behave might be wrong.
-
-And while JavaScript lacks any formal support for Inheritence, Encapsulation,
-or Polymorphism, you'll find that even without that, the tools provided can be
-used in a rich variety of ways to provide many of the features of traditional
-object oriented languages.
+Although Javascript is Object Oriented, it differs from many other object
+oriented languages in some keys ways. This different style of Object Oriented
+programming is called ["Prototype Based"](http://en.wikipedia.org/wiki/Prototype-based_programming).
+There is no formal construct knowns as a class. Rather it has only Objects, and
+Constructor Functions. People coming from a background in other languages might
+find this confusing, and should be warned that many of your intuitions about
+the way these constructs behave could be wrong.
 
 ### Constructor Functions ###
 
