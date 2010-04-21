@@ -34,8 +34,10 @@ Similarly
     o["x"]
     => 10
 
-The goal of this document to talk about how we can use these objects to our
-advantage.
+Objects provide the foundation for much of JavaScript. It is the primary tool
+for code reuse, for namespacing, and certainly the most tool for storing and
+manipulating data. The goal of this document to talk about how we can use
+manipulate, and create objects to our advantage.
 
 ## Building Your Own Objects ##
 
