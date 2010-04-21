@@ -247,6 +247,20 @@ __Bad__:
 > Trailing commas aren't supported in some browsers, so avoiding them is your
 > best bet.
 
+### With ###
+
+If you aren't absolutely sure, without a shadow of a doubt, that you __need_ to
+use the with keyword. Then you almost certainly don't want to.
+
+    with({x: 10}) {
+      console.log(x);
+    }
+    => 10
+
+> With alters the lookup table for the current scope. While this can appear
+> useful it makes reasoning about your programs really hard. It's best to
+> avoid it entirely.
+
 ### Monkey Patching ###
 
 Don't modify global objects in ways they weren't intended.

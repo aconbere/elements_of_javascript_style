@@ -19,6 +19,9 @@ And they are everywhere!
     h.x
     => 10
 
+> This is the "object literal" syntax, it provides a simple and clean syntax
+> for making objects.
+
 Similarly
 
     var o = new Object();
@@ -34,92 +37,68 @@ Similarly
 The goal of this document to talk about how we can use these objects to our
 advantage.
 
-## Classes ##
+## Building Your Own Objects ##
 
-In a traditional sense, JavaScript has no notion of a class. Rather it has only
-Objects, and ways to create objects. If we generalize however, a class is the
-abstracted collection of behaviors that you want a set of objects to posses.
-And in that sense we can easily construct classes.
+Although Javascript is distinctly Object Oriented, you'll notices that it has
+no notion of a class. Rather it has only Objects, and Constructor Functions.
+People coming from a background in other object oriented languages might find
+this confusing, and should be warned that many of your intuitions about the way
+these constructs behave might be wrong.
+
+And while JavaScript lacks any formal support for Inheritence, Encapsulation,
+or Polymorphism, you'll find that even without that, the tools provided can be
+used in a rich variety of ways to provide many of the features of traditional
+object oriented languages.
+
+### Constructor Functions ###
+
+New types of objects are defined using Constructor functions.
 
     var Speaker = function() {};
 
-We can create new instances of this class easily.
+A Constructor Function is in all respects the same as any other function, it
+differs only in how it is called.
 
-    var m = new Speaker();
+    var s = new Speaker();
 
-We can give this Class behaviors by adding functions to it's prototype. A
-Prototype is an object defineable on all objects in javascript. It's a little
-piece that get's transfered to a new instance whenever the new arguement is used.
+The use of the new keyword in this case has a variety of effects on the
+behavior of the function. First, it creates an invisible object called 'this',
+and Second it creates an implict return value of "this". "this", becomes our
+brand new object.
 
-    Speaker.prototype.sayHello = function() {
-      return "Hello";
+Since the Constructor has access to this, from the start, you can manipulate
+the returned object by manipulating this.
+
+    var Microphone = function() {
+      this.volume = 10;
+    }
+
+    var m = new Microphone();
+    m.volume
+    => 10
+
+We can also manipulate "this", by operating on the Constructors prototype
+object. The prototype object provides a starting point for "this", and is
+simply an ordinary object, attached to the "prototype" field of a Constructor
+Function.
+
+    var Amp = function(maxVolume) {
+      this.maxVolume = maxVolume || 10;
+      this.volume = 0;
+    }
+
+    Amp.prototype.setVolume(volume) {
+      this.volume = Math.min(this.maxVolume, volume);
     };
 
-    m = new Speaker();
-    m.sayHello()
-    => "Hello"
+    var a1 = Amp();
+    a.setVolume(11);
+    a.volume
+    => 10
 
-And we can give the objects initial data, by playing with the function that
-defines the class.
+    var a2 = Amp(11);
+    a.setVolume(11);
+    a.volume
+    => 11
 
-    Speaker = function(name) {
-      this.name = name;
-    };
-
-    Speaker.prototype.sayHello = function() {
-      return "Hello my name is " + this.name + ".";
-    };
-
-    m = new Speaker("Carl");
-
-    m.sayHello();
-    =>  "Hello my name is Carl."
-
-We've introduce another object in this last example, "this". In JavaScript
-the "this" keyword defines the current state of an object instance. It's 
-important that it's a keyword, as the data that "this" points to can change.
-This is most notable when using callbacks from within an object.
-
-    var Receiver = function(name) {
-      this.name = name;
-    };
-
-    Receiver.prototype.repeat(f) {
-      return f();
-    };
-
-    var r = new Receiver("Sam");
-    
-
-    Speaker.prototype.sendMessage = function() {
-      r.repeat(function() {
-        this.sayHello(); // This will result in an error!
-      });
-    };
-
-
-## How To Use Prototypes ##
-
-    var Vehicle = function() {
-      this.speed = 0;
-      this.direction = [0, 0];
-      this.maxSpeed = 10;
-    };
-
-    Vehicle.prototype.setSpeed = function(speed) {
-      this.speed = Math.max(speed, this.maxSpeed);
-    };
-
-
-    var Car = function() {
-      this.maxSpeed = 120;
-    };
-
-    Car.prototype = Vehicle.prototype
-
-
-    var Bike = function() {
-      this.maxSpeed = 25;
-    };
-
-    Bike.prototype = Vehicle.prototype
+### Inheritence ###
