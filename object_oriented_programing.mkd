@@ -61,7 +61,7 @@ differs only in how it is called.
     var s = new Speaker();
 
 The use of the new keyword causes the creation of a new object referenced as
-'this', and creates an implict return value the object. Thus "this", becomes our
+'this', and creates an implict return value of the object. Thus "this", becomes our
 brand new object.
 
 Since the Constructor has access to "this", from the start, you can manipulate
