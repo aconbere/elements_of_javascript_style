@@ -44,10 +44,10 @@ manipulate, and create objects to our advantage.
 Although Javascript is Object Oriented, it differs from many other object
 oriented languages in some keys ways. This different style of Object Oriented
 programming is called ["Prototype Based"](http://en.wikipedia.org/wiki/Prototype-based_programming).
-There is no formal construct knowns as a class. Rather it has only Objects, and
-Constructor Functions. People coming from a background in other languages might
-find this confusing, and should be warned that many of your intuitions about
-the way these constructs behave could be wrong.
+In prototype based programming, there is no formal construct knowns as a class.
+Rather there are only Objects, and Constructor Functions. People coming from a
+background in other languages might find this confusing, and should be warned
+that many of your intuitions about the way these constructs behave could be wrong.
 
 ### Constructor Functions ###
 
@@ -60,13 +60,12 @@ differs only in how it is called.
 
     var s = new Speaker();
 
-The use of the new keyword in this case has a variety of effects on the
-behavior of the function. First, it creates an invisible object called 'this',
-and Second it creates an implict return value of "this". "this", becomes our
+The use of the new keyword causes the creation of a new object referenced as
+'this', and creates an implict return value the object. Thus "this", becomes our
 brand new object.
 
-Since the Constructor has access to this, from the start, you can manipulate
-the returned object by manipulating this.
+Since the Constructor has access to "this", from the start, you can manipulate
+the returned object by manipulating "this".
 
     var Microphone = function() {
       this.volume = 10;
