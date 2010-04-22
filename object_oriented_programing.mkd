@@ -53,7 +53,7 @@ that many of your intuitions about the way these constructs behave could be wron
 
 New types of objects are defined using Constructor functions.
 
-    var Speaker = function() {};
+    var Speaker = function () {};
 
 A Constructor Function is in all respects the same as any other function, it
 differs only in how it is called.
@@ -67,7 +67,7 @@ brand new object.
 Since the Constructor has access to "this", from the start, you can manipulate
 the returned object by manipulating "this".
 
-    var Microphone = function() {
+    var Microphone = function () {
       this.volume = 10;
     }
 
@@ -80,7 +80,7 @@ object. The prototype object provides a starting point for "this", and is
 simply an ordinary object, attached to the "prototype" field of a Constructor
 Function.
 
-    var Amp = function(maxVolume) {
+    var Amp = function (maxVolume) {
       this.maxVolume = maxVolume || 10;
       this.volume = 0;
     }
@@ -100,3 +100,63 @@ Function.
     => 11
 
 ### Inheritence ###
+
+We've already seen that by manipulating a Constructor's prototype object you can
+attach a set of behaviors to all of its instances. To share those behaviors with
+another type of object, we can just assign an object to a prototype.
+
+The most simple use of this might be to attach a shared data set to several
+types.
+
+    var SharedCableData = {
+      length: 15,
+      jack: 1/4
+    }
+
+    var SpeakerCable = function () {};
+    SpeakerCable.prototype = SharedCableData;
+
+    var MicCable = function() {}
+    MicCable.prototype = SharedCableData;
+
+However this is possibly dangerous, as any future modifications to the
+prototype object of either type, will effect both types. In most cases that
+behavior is unexpected and is best to avoid it by making sure that the object
+you're assigning to a prototype is a new instance.
+
+    var SharedCableData = function() {};
+    SharedCableData.length = 15;
+    SharedCableData.jack = 1/4;
+
+    var PACable = function() {}
+    PACable.prototype = new SharedCableData();
+
+> By using the new keyword when assigning to a prototype, we avoid accidentally
+> changing all other types using shared cable data.
+
+
+Using that method, we can easily see how to share behavior between types. Below
+I make use of our previous Amp Constructor to build a PA. Which in this case is
+an Amp with the ability to be directionaly positioned.
+
+    var PA = function (maxVolume, direction) {
+      this.maxVolume = maxVolume;
+      this.direction = direction;
+    };
+
+    PA.prototype = new Amp();
+
+    PA.prototype.setDirection = function (direction) {
+      this.direction = direction;
+    };
+
+    var pa = new PA(10, 180);
+    pa.setVolume(11);
+    pa.volume;
+    => 10
+
+    pa.setDirection(90);
+    pa.direction;
+    => 90;
+
+
