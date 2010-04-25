@@ -1,64 +1,148 @@
-One of JavaScripts strengths is the ability to make use of many functional
-programming constructs easily. It has first class functions (functions that
-can be stored as variables and passed to other functions), and it has a built
-in syntax for defining anonymous functions, or "lambdas".
+# Functional Programming In JavaScript #
 
-map, reduce, filter
+One of JavaScript's strengths is the ability to make use of many functional
+programming constructs. It has the ability to store functions as variables
+and pass functions as arguments; first class functions. As well as
+reasonably terse inline function declaration; lambdas, or anonymous functions
+as they're called in JavaScript.
 
-## Map ##
-    var map = function(array, f) {
-      var _map = function(acc, array, f) {
-        if( array.length <= 0) {
-          return acc;
-        } else {
-          return _map(acc.concat([f(array.shift())]), array, f);
-        }
-      };
 
-      return _map([], array, f);
-    };
+## Lambda or Anonymous Functions ##
 
-    map([1,2,3], function(i) { return i * i });
-    => [1, 4, 9]
+Functions in JavaScript are declared using the "function" keyword.
 
-## Reduce ##
-
-    var reduce = function(array, acc, f) {
-      if( array.length <= 0 ) {
-        return acc;
-      } else {
-        return reduce(array, f(acc, array.shift()), f);
-      }
+    var name = function (arg1, arg2) {
+      body;
     }
 
-    reduce([1, 2, 3], 0, function(sum, i) { return sum + i }); 
-    => 6
+When a function is used anonymously it takes this same form, but is never
+assigned to a variable, or as the terminology would have it; given a name.
 
-## Filter ##
+    [1,2,3,4].forEach(function (i) {
+      console.log(i);
+    });
 
-    var filter = function(array, f) {
-      var _filter = function(acc, array, f) {
-        if(array.length <= 0) {
-          return acc;
-        } else {
-          var head = array.shift();
+So named function declaration, is really just the step of giving an anonymous
+function a name by assigning it to a variable.
 
-          if(f(head)) {
-            return _filter(acc.concat([head]), array, f);
-          } else {
-            return _filter(acc, array, f);
-          }
-        }
-      };
+You'll often see this pattern of declaring functions in line, when assigning
+callbacks such as assigning event listeners. But this same pattern is a great
+tool for simplifying many common tasks. We'll take a look at a few of those.
 
-      return _filter([], array, f);
+## Understanding Closures ##
+
+One of the first things you'll like discover when making use of these patterns
+is that the scope of these functions can get a little confusing, especially
+when used inside the scope of an Object.
+
+All functions in JavaScript are Closures, which is a technical term, defined a
+first-class function with free variables that are bound in the lexical
+environment. We've already covered how functions in javascript are first class,
+the second part of the definition is a little trickier. It means that a
+function when defined, carries with it the variables around it.
+
+Let's look at some simple examples:
+
+    var x = 10;
+
+    var multX = function (y) {
+      return y * x;
     };
 
-    filter([1,2,3,4,5,6,7,8,9,10], function(i) { return i <= 5 });
-    => [1,2,3,4,5]
+    multX(2);
+    => 20
 
-## Map / Reduce ##
+Here multX carries with it x. And even if that function were called inside
+another scope that defines x, it will remain the x that it was originally
+in it's environment.
 
-    reduce(map([1,2,3], function(i) { return i * i }), 0, function(sum, i) { return sum + i });
-    => 14
-    
+    var testCallBack = function (cb) {
+      var x = 200;
+      return cb(2);
+    }
+
+    testCallBack(multX);
+    => 20
+
+Beyond that, the callback can actually manipulate it's environment.
+
+    var manipX = function (y) {
+      var tmp = y * x
+      x = tmp;
+      return tmp;
+    };
+
+    testCallBack(manipX);
+    => 20;
+
+    x;
+    => 20
+
+As you can see, even though we're calling manipX in a different scope, the
+original x is the one that is altered.
+
+## Using Closures Inside Objects ##
+
+I mentioned that closures can become tricky inside of Objects. This is all
+because of the "this" keyword. Although for most intents and purposes it's easy
+to think of "this" as an object, since the dot, and [] operators behave as if
+it were one. However, this isn't resolved until it __has__ to be.
+
+First let's create a simple object that accepts a callback.
+
+    var CallBacker = function () {
+      this.property = "ABC";
+    };
+
+    CallBacker.prototype.callback = function (cb) {
+      return cb();
+    }
+
+This object does nothing more than return the value of the callback. Let's see
+how this simple function acts when we use it inside another object.
+
+    var testFunction = function () {
+      this.property = "XYZ";
+
+      return callBacker.callback(function () {
+        return this.property;
+      });
+    };
+
+    testFunction();
+    => "ABC"
+
+What the heck?! What happened?!
+
+Well, this isn't bound until the function is called. So in the case of the
+callback in testFunction, even though it's defined as returning this.property,
+"this" isn't defined until it's called in CallBacker. In CallBacker,
+this.property is defined as "ABC", so we get "ABC" back. In practice these
+issues often present themselves as "property x is undefined" errors, where
+the value of this that you expected doesn't have the data on it that you
+expected.
+
+We can avoid this with a couple of tricks.
+
+    var testFunction2 = function () {
+      this.property = "XYZ";
+
+      var that = this;
+      return callBacker.callback(function () {
+        return that.property;
+      });
+    };
+
+    testFunction2();
+    => "XYZ"
+
+By binding the value of this to that, before definition of the callback
+function we prevent the weirdness of the this keyword in the callback later. 
+
+At this point you might be asking why JavaScript was made with this strange
+behavior, that it's a huge mistake. In reality this is a compromise that many
+languages are faced with. The compromise that the designers of JavaScript chose
+is not necessarily better or worse than the compromises made by other
+languages. The benefit of the JavaScript method is that it allows the easy
+rebinding of methods onto objects, like we've seen when defining shared
+prototypes.

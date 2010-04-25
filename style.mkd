@@ -1,0 +1,271 @@
+# Elements of JavaScript Style #
+
+> "Break any of these rules sooner than say anything outright barbarous."
+> - George Orwell
+
+We start with the assertion that there is a great language inside of JavaScript. But that many people struggle to find their way to it. The most common resources for learning were written in the dark ages of the web, and advocate a style and structure that is non-conducive to quality readable code.
+
+The goal is to fill a gap in the JavaScript community, to codify common styles, to point out common anti-patterns to those learning the language for the first time, and to solidify a set of common styles for those who have been at this for a while longer.
+
+> I know that some of this advice flies in the face of some libraries, and some people's personal style opinions. It's worth noting that I'm not suggesting that everyone in the world should agree with this, or even follow this advice. But that when suggesting a set of styles for someone learning JavaScript, these would be a great set of suggestions. Please keep that target audience in mind.
+
+## Semi-Colons ##
+
+Always end each statement with a semi-colon ";".
+
+    var x = 10;
+    var y = 20;
+    var f = function () {
+      var z = (x * y);
+      return z;
+    };
+
+> While in most implimentations semi-colons are only required if there are
+> multiple statements on one line. By following this rule you allow your
+> code to be easily minified, and manipulated by others.
+
+## Scopes and Name Spaces ##
+
+Work to stay out of the global scope as much as possible. The default scope for variables and functions in JavaScript is global. This can make life difficult.  Some strategies to avoid issues are:
+
+Make sure all variables that are scoped to a particular block, and declared with the var keyword.
+
+    var f = function () {
+      var x = 10;
+      return x;
+    };
+
+> Variables declared without var, are always injected into the global name space.
+
+    var f = function () {
+      x = 10;
+    };
+
+    x
+    => 10
+
+This holds true in for loops as well as functions. The variables you declare
+inside of a for loop, can escape, so be sure to declare them properly.
+
+__Good__:
+    var j = 0;
+    for(var i = 0; i < 10; i++) {
+      j++;
+    }
+    i
+    => 10
+
+
+__Bad__:
+    var j = 0;
+    for(i = 0; i < 10; i++) {
+      j++;
+    }
+    i
+    => 10
+
+When writing your applications make use of objects to store your classes and functions.
+
+    var MyApp = {};
+    MyApp.Map = function () {};
+  
+    var x = new MyApp.Map();
+
+> This prevents accidental name collisions with other libraries. If you want the
+> Map object, consider that it's a common name for an object. By attaching the
+> Map object to a less generic object like MyApp, you greatly reduce the chance
+> of accidental collision.
+
+Instead of making a bunch of extra variables in a name space, you can contain them within an anonymous function.
+
+    var x = function () {
+      var y = 10;
+      var z = 20;
+      return {"x": 0,
+              "y": y,
+              "z": z };
+    }();
+
+## Indentation ##
+
+Always use two or four spaces, never both, no tabs
+
+    var f = function (el) {
+      return el;
+    };
+
+## WhiteSpace ##
+
+Avoid extraneous whitespace
+
+    spam(ham[1], {eggs: 2})
+
+For clarity use one space before and after operators.
+
+    10 * (2.0 / 5.0)
+
+## Braces ##
+
+The starting brace begins inline with the block definition. The closing brace
+ends on its own line at the bottom of the block, in the same column as the
+begining of the block definition.
+
+    var f = function () {
+      var g = function () {
+        if (true) {
+          return "g";
+        }
+      };
+      return g();
+    };
+
+In the case of if / else blocks. The else belongs inline with the closing
+brace. Previous rules hold.
+
+    if (true) {
+      return "apple";
+    } else {
+      return "orange";
+    }
+
+### One Line Ifs ###
+
+Never leave the optional braces off of a one line if.
+
+__Good:__
+    if(condition) { return "apple"; }
+    if(condition) {
+      return "apple";
+    }
+
+__Bad:__
+    if(condition) return "apple";
+    if(condition)
+      return "apple";
+
+> Leaving off the braces on one line ifs makes refactoring your code much more
+> difficult. When adding more behavior to the conditional the braces will have
+> to be added in, also it can cause confusion when moving the block.
+
+## Naming ##
+
+Variables and methods should be __camelCase__.
+
+Constructors should be __CamelCased__ but capitalized in front.
+
+Constants should be __ALL_CAPS__.
+
+    var MY_CONSTANT = 10;
+
+    var myVariable = 12;
+
+    var MyConstructor = function () {
+      this.myMember = 13;
+    };
+
+    MyConstructor.prototype.myMethod = function () {
+      alert(this.myMember);
+    };
+
+## Functions ##
+
+Functions should be declared as variables, and whenever possible, defined on multiple lines.
+
+    var myFunc = function () {
+      return "apple";
+    };
+
+> This presents a single syntax for function declaration. It mirrors the
+> anonymous syntax used with passing functions to callbacks, and the
+> method of defining functions on classes or objects.
+
+For one liners, and inline functions, an extra space after the starting brace,
+and before the ending brace improves readability.
+
+    var myFunc = function () { return "apple"; };
+
+Avoid declaring functions inside object literals.
+
+    var myObj = {property: 1};
+    myObj.prop = function () {
+      return this.property;
+    };
+
+> Function declaration inside objects isn't strictly bad, but it's worth
+> observing that it can quickly become crowded with braces, and in most
+> cases it can be more clearly accomplished by attaching the functions
+> to the object directly.
+
+### Optional Arguments ###
+
+To define an optional argument use the "||" operator.
+
+    var myFunc = function (x) {
+      x = x || "default";
+    };
+
+## Hashes ##
+
+Use strings as hash keys.
+
+    {"event": 20,
+     "function": 30,
+     "if": 40
+    }
+
+> In some implementations, keywords are invalid hash keys. Wrap them in quotes
+> to prevent issues.
+
+## Things To Avoid ##
+
+### Trailing Commas ###
+
+Never use a trailing comma.
+
+__Good__:
+
+    ["apple",
+     "orange",
+     "pineapple"
+    ]
+
+    {x: 10,
+     y: 10
+    }
+
+__Bad__:
+
+    ["apple",
+     "orange",
+     "pineapple",
+    ]
+
+    {x: 10,
+     y: 10,
+    }
+    
+> Trailing commas aren't supported in some browsers, so avoiding them is your
+> best bet.
+
+### With ###
+
+If you aren't absolutely sure, without a shadow of a doubt, that you __need_ to
+use the with keyword. Then you almost certainly don't want to.
+
+    with({x: 10}) {
+      console.log(x);
+    }
+    => 10
+
+> With alters the lookup table for the current scope. While this can appear
+> useful it makes reasoning about your programs really hard. It's best to
+> avoid it entirely.
+
+### Monkey Patching ###
+
+Don't modify global objects in ways they weren't intended.
+
+    Object.prototype.type = "apple";
+
+> Developers depend on being able to make good assumptions about the behavior of their tools. When changes are made that subtly change the behavior of code they're using  it makes it very hard to write correct programs.
+

@@ -159,4 +159,20 @@ an Amp with the ability to be directionaly positioned.
     pa.direction;
     => 90;
 
+### Encapsulation ###
 
+Encapsulation is the process or method of hiding data from users of your
+objects. By exposing only the set of methods that users will need, you limit
+your liability. It frees you to change the behavior of methods that are hidden,
+while making sure that code that depends on those objects keeps working.
+
+Some languages provide tools to manage what is hidden and what is public, with
+special keywords like, "public", "private", "protected". JavaScript doesn't
+have any of these keywords yet encapsulation is still possible by use of the
+Constructor functions private scope.
+
+As mentioned earlier, when you use the new keyword it creates an implicit
+return value of "this" on that function. When you set an explicit return, it
+takes precedence and over-rides that implicit return.
+
+So let's look at an example.
