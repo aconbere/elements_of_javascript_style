@@ -5,6 +5,6 @@ We start with the assertion that there is a great language inside of JavaScript.
 
 This is an evolving document, one that I hope the JavaScript community finds useful, In it I'm trying to collect best practices, patterns and styles, into a larger and comprehensive document about how best to tackle writing JavaScript applications.
 
-(A Simple Style Guide)[ http://github.com/aconbere/elements_of_javascript_style/blob/master/style.mkd ]
-(Object Oriented Style)[ http://github.com/aconbere/elements_of_javascript_style/blob/master/object_oriented_programing.mkd ]
-(Functional Style)[ http://github.com/aconbere/elements_of_javascript_style/blob/master/functional_programming.mkd ]
+[A Simple Style Guide]( http://github.com/aconbere/elements_of_javascript_style/blob/master/style.mkd ]
+[Object Oriented Style]( http://github.com/aconbere/elements_of_javascript_style/blob/master/object_oriented_programing.mkd ]
+[Functional Style]( http://github.com/aconbere/elements_of_javascript_style/blob/master/functional_programming.mkd ]
